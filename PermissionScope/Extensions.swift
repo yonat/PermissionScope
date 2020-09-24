@@ -9,6 +9,16 @@
 import Foundation
 import UIKit
 
+extension UIApplication {
+    var firstKeyWindow: UIWindow? {
+        if #available(iOS 13, *) {
+            return windows.first { $0.isKeyWindow }
+        } else {
+            return keyWindow
+        }
+    }
+}
+
 extension UIColor {
     /// Returns the inverse color
     var inverseColor: UIColor{

@@ -763,12 +763,12 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     public func statusPhotos() -> PermissionStatus {
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
-        case .authorized:
-            return .authorized
         case .denied, .restricted:
             return .unauthorized
         case .notDetermined:
             return .unknown
+        default:
+            return .authorized
         }
     }
     
@@ -1047,7 +1047,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     */
     fileprivate func showAlert() {
         // add the backing views
-        let window = UIApplication.shared.keyWindow!
+        let window = UIApplication.shared.firstKeyWindow!
         
         //hide KB if it is shown
         window.endEditing(true)
@@ -1097,7 +1097,7 @@ typealias resultsForConfigClosure     = ([PermissionResult]) -> Void
     Hides the modal viewcontroller with an animation.
     */
     public func hide() {
-        let window = UIApplication.shared.keyWindow!
+        let window = UIApplication.shared.firstKeyWindow!
 
         DispatchQueue.main.async(execute: {
             UIView.animate(withDuration: 0.2, animations: {
